@@ -47,6 +47,10 @@ defmodule EnhancedMapTest do
     assert EnhancedMapTest.WithAttributes.proceed_comprehension_keys_test()
   end
 
+  test "validate multi comprehension" do
+    assert EnhancedMapTest.WithAttributes.proceed_multi_comprehension_keys_test()
+  end
+
   test "validate when key is map" do
     assert EnhancedMap.has_keys(%{%{} => nil}, [%{}])
   end

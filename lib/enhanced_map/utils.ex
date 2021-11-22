@@ -21,10 +21,12 @@ defmodule EnhancedMap.Utils do
 
       {:++, _, [list1, list2]} ->
         do_walk(list1, caller) ++ do_walk(list2, caller)
-
-      [{:|, _, [elem, list]}] ->
-        [do_walk(elem, caller) | do_walk(list, caller)]
-
+      list when is_list(list) ->
+        case Enum.reverse(list) do
+          [{:|, _, [elem, list]}| rem] ->
+            Enum.reverse(do_walk(rem, caller)) ++ [do_walk(elem, caller) | do_walk(list, caller)]
+          l -> l
+        end
       o ->
         o
     end)

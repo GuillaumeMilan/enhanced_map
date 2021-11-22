@@ -24,4 +24,11 @@ defmodule EnhancedMapTest.WithAttributes do
       _ -> false
     end
   end
+
+  def proceed_multi_comprehension_keys_test do
+    case %{toto: nil, titi: nil, tata: nil, tutu: nil, tyty: nil} do
+      map when EnhancedMap.has_keys(map, [:tutu, :tyty | @mandatory_keys]) -> true
+      _ -> false
+    end
+  end
 end
