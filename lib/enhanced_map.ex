@@ -10,21 +10,21 @@ defmodule EnhancedMap do
   ## Examples
 
       iex> require EnhancedMap
-      iex> EnhancedMap.has_keys?(%{toto: nil, titi: nil}, [:toto, :titi])
+      iex> EnhancedMap.has_keys(%{toto: nil, titi: nil}, [:toto, :titi])
       true
 
       iex> require EnhancedMap
-      iex> EnhancedMap.has_keys?(%{toto: nil, titi: nil}, [:toto, :titi, :tata])
+      iex> EnhancedMap.has_keys(%{toto: nil, titi: nil}, [:toto, :titi, :tata])
       false
 
       iex> require EnhancedMap
       iex> case %{toto: nil, titi: nil} do
-      ...>   map when EnhancedMap.has_keys?(map, [:toto, :titi, :tata]) -> :will_not_match
-      ...>   map when EnhancedMap.has_keys?(map, [:toto, :titi]) -> :will_match
+      ...>   map when EnhancedMap.has_keys(map, [:toto, :titi, :tata]) -> :will_not_match
+      ...>   map when EnhancedMap.has_keys(map, [:toto, :titi]) -> :will_match
       iex> end
       :will_match
   """
-  defmacro has_keys?(term, keys) do
+  defmacro has_keys(term, keys) do
     keys = EnhancedMap.Utils.do_walk(keys, __CALLER__)
 
     keys
